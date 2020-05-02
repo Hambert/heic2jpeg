@@ -1,0 +1,10 @@
+.now
+.env
+.DS_Store
+venv
+*.sublime-*
+__pycache__/
+.idea/
+src
+build
+dist
