@@ -1,32 +1,35 @@
 import whatimage
 import pyheif
-import exifread
 from PIL import Image
+import os.path
 
 def convFile(filepath):
-    with open(filepath, 'rb') as f:
-        data = f.read()
-        fmt = whatimage.identify_image(data)
-        '''
-        tags = exifread.process_file(f)
+    try:
+        with open(filepath, 'rb') as f:
+            data = f.read()
+            fmt = whatimage.identify_image(data)
 
-        print(tags)
-        print(fmt)
-        '''
-        if fmt == 'heic':
+             
 
-            heif_file = pyheif.read_heif(data)
-            image = Image.frombytes(mode=heif_file.mode, size=heif_file.size, data=heif_file.data)
+            if fmt == 'heic':
+                if filepath.rfind('/') == -1:
+                    pathSep = '\\'
+                else:
+                    pathSep = '/'
 
-            if filepath.rfind('/') == -1:
-                pathSep = '\\'
-            else:
-                pathSep = '/'
+                file = filepath[filepath.rfind(pathSep)+1: filepath.rfind('.')]
+                path = filepath[:filepath.rfind(pathSep)+1]
 
-            file = filepath[filepath.rfind(pathSep)+1: filepath.rfind('.')]
-            path = filepath[:filepath.rfind(pathSep)+1]
+                if os.path.isfile(path + file +".jpg"):
+                    return 2
+                    
+                heif_file = pyheif.read_heif(data)
+                image = Image.frombytes(mode=heif_file.mode, size=heif_file.size, data=heif_file.data)
+                image.save( path + file +".jpg", "JPEG")
 
-            image.save( path + file +".jpg", "JPEG")
+                return 1
+    except:
+        return 0
 
 
 def checkFile(filepath):

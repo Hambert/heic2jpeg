@@ -79,8 +79,12 @@ class Example(QMainWindow):
 		# start converting file
 		elif (self.selectedFileEnd == '.HEIC' ) | (self.selectedFileEnd == '.heic' ):
 			self.statusBar().showMessage('start converting')
-			imagefunctions.convFile(self.selectedPath)
-			self.statusBar().showMessage('file converted')
+			if imagefunctions.convFile(self.selectedPath) == 1:
+				self.statusBar().showMessage('file converted')
+			elif imagefunctions.convFile(self.selectedPath) == 2:
+				self.statusBar().showMessage('file exits')
+			else:
+				self.statusBar().showMessage('Something went wrong')
 		else:
 			# alert if not supported file is selected
 			self.statusBar().showMessage('file type not supported')

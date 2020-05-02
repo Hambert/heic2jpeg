@@ -1,0 +1,8 @@
+cffi==1.14.0
+enum34==1.1.10
+Pillow==7.1.2
+pycparser==2.20
+pyheif==0.4
+PyQt5==5.14.2
+PyQt5-sip==12.7.2
+whatimage==0.0.3
