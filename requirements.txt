@@ -1,6 +1,10 @@
 cffi==1.14.5
 enum34==1.1.10
+<<<<<<< HEAD
 Pillow==8.2.0
+=======
+Pillow==8.1.1
+>>>>>>> 6843ffeaeb198b231fd6e4cfe223de21f3dc717c
 pycparser==2.20
 pyheif==0.5.1
 PyQt5==5.15.4
